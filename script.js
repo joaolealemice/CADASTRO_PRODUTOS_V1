@@ -52,3 +52,31 @@ campoTarefa.addEventListener('keypress', (evento) => {
         adicionarTarefa();
     }
 });
+
+/* ===== Novas funções: saudação por horário + relógio e data ===== */
+const elSaudacao = document.getElementById('saudacao');
+const elRelogio = document.getElementById('relogio');
+const elData = document.getElementById('data');
+
+function atualizarRelogio() {
+    const agora = new Date();
+    const hora = agora.getHours();
+
+    let saudacao = 'Boa noite!';
+    if (hora < 12) {
+        saudacao = 'Bom dia!';
+    } else if (hora < 18) {
+        saudacao = 'Boa tarde!';
+    }
+
+    elSaudacao.textContent = saudacao;
+    elRelogio.textContent = agora.toLocaleTimeString('pt-BR');
+    elData.textContent = agora.toLocaleDateString('pt-BR', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long'
+    });
+}
+
+atualizarRelogio();
+setInterval(atualizarRelogio, 1000);
